@@ -4,6 +4,13 @@ import * as fs from 'fs';
 import FileType from './FileType';
 import vsHelp from './vsHelp';
 import getNewContent from './getJs';
+import {
+	Uri,
+	window,
+	InputBoxOptions,
+	commands,
+	env,
+  } from 'vscode';
 
 export class Dom {
     //当前用户配置
@@ -49,7 +56,7 @@ export class Dom {
     public generateResources(notice?: boolean): void {
         try {
             const base = path.dirname(require.main.filename);
-            copy(path.join(__dirname, '../../res/'), path.join(base, 'vs', 'code', 'electron-sandbox', 'workbench'));
+            copy(path.join(__dirname, '../../res/'), path.join(env.appRoot, 'vs', 'code', 'electron-sandbox', 'workbench'));
             this.install(true);
             notice && vsHelp.showInfo('资源文件配置成功');
         } catch (e) {
@@ -67,7 +74,7 @@ export class Dom {
     public removeResources(notice?: boolean): void {
         try {
             const base = path.dirname(require.main.filename);
-            removeFiles(path.join(base, 'vs', 'code', 'electron-sandbox', 'workbench', 'live2d'));
+            removeFiles(path.join(env.appRoot, 'vs', 'code', 'electron-sandbox', 'workbench', 'live2d'));
             this.uninstall();
             notice && vsHelp.showInfoRestart('资源文件移除成功');
         } catch (e) {

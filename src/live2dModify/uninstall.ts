@@ -1,9 +1,16 @@
 import * as path from 'path';
 import * as fs from 'fs';
+import {
+	Uri,
+	window,
+	InputBoxOptions,
+	commands,
+	env,
+  } from 'vscode';
 
 const base = process.cwd();
 // 文件路径
-const filePath = path.join(base, 'resources', 'app', 'out', 'vs', 'code', 'electron-sandbox', 'workbench', 'workbench.js');
+const filePath = path.join(env.appRoot, 'resources', 'app', 'out', 'vs', 'code', 'electron-sandbox', 'workbench', 'workbench.js');
 const extName = "vscode-live2d";
 
 
@@ -17,7 +24,7 @@ function main() {
         const base = path.dirname(require.main.filename);
         content = clearCssContent(content);
         saveContent(content);
-        removeFiles(path.join(base, 'vs', 'code', 'electron-sandbox', 'workbench', 'live2d'));
+        removeFiles(path.join(env.appRoot, 'vs', 'code', 'electron-sandbox', 'workbench', 'live2d'));
         return true;
     }
     catch (ex) {
